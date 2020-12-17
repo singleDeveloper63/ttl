@@ -10,6 +10,61 @@ i{
     font-size: 20px;
 }
 
+@media(max-width:1170px){
+    i{
+        font-size: 16px;
+    }
+}
+
+
+@media(max-width:998px){
+    i{
+        font-size: 12px;
+    }
+
+    ul{
+        line-height: 8px;
+        --he : 5 !important;
+    }
+}
+
+
+
+@media(max-width:760px){
+    i{
+        font-size: 10px;
+    }
+}
+
+
+@media(max-width:670px){
+    i{
+        font-size: 7px;
+    }
+    ul{
+        line-height: 6px;
+        --he:3 !important;
+    }
+}
+
+
+
+@media(max-width:370px){
+    i{
+        font-size: 3px;
+    }
+    ul{
+        line-height:0px;
+        animation: bounce 3s cubic-bezier(0.215, 0.610, 0.355, 1) infinite;
+        --he:2 !important;
+        margin: 0px 5px !important;
+    }
+    li{
+        animation: none !important;
+    }
+}
+
+
 .container{
     position: relative;
     width: 100vw;
@@ -43,46 +98,35 @@ i{
 
 ul {
     padding: 0;
+    --he : 10;
     margin: 0 10px;
     list-style: none !important;
+    animation: bounce 0.5s cubic-bezier(0.215, 0.610, 0.355, 1) infinite;
+    animation-delay: calc(var(--del)*0.7s);
 }
 
 li{
     text-align: center;
-}
-
-@keyframes scale{
-    0% , 100%{
-        transform: scale(0);
-    }
-    50%{
-        transform: scale(1.1);
-    }
-}
-
-li{
+    --le:4;
     animation: transit 0.5s cubic-bezier(0,.97,1,-1.11) infinite;
     animation-delay: calc(var(--i)*0.003s);
 }
 
 @keyframes transit{
     0%,100%{
-        transform: translateX(-40px);
+        transform: translateX(calc(var(--le) * 10px));
     }
     50%{
         transform: translateX(0px);
     }
 }
-ul{
-    animation: bounce 0.5s cubic-bezier(0.215, 0.610, 0.355, 1) infinite;
-    animation-delay: calc(var(--del)*0.7s);
-}
+
 
 @keyframes bounce{
     0%,100%{
-        transform: translateY(10px);
+        transform: translateY(calc(var(--he)*3px));
     }
     50%{
-        transform: translateY(-10px);
+        transform: translateY(calc(var(--he)*-3px));
     }
 }
