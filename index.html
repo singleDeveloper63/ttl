@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Toqtagu'l</title>
+    <link rel="stylesheet" href="./fontawesome-pro-5.14.0-web/css/all.css">
+    <link rel="stylesheet" href="./style.css">
+</head>
+<body>
+    <div class="container">
+        <div class="back"></div>
+        <div class="text">
+        </div>
+    </div>
+    <script>
+
+        //Ha'ripler koordinatalari 6x6 matritsada
+
+        const coords = {
+            t : [
+                [1,1,1,1,1,1],
+                [0,0,1,1,0,0],
+                [0,0,1,1,0,0],
+                [0,0,1,1,0,0],
+                [0,0,1,1,0,0],
+                [0,0,1,1,0,0]
+            ],
+            o : [
+                [1,1,1,1,1,1],
+                [1,0,0,0,0,1],
+                [1,0,0,0,0,1],
+                [1,0,0,0,0,1],
+                [1,0,0,0,0,1],
+                [1,1,1,1,1,1]
+            ],
+            q : [
+                [1,1,1,1,1,1],
+                [1,0,0,0,0,1],
+                [1,0,0,0,0,1],
+                [1,1,1,1,1,1],
+                [0,0,0,0,0,1],
+                [0,0,0,0,0,1]
+            ],
+            a: [
+                [1,1,1,1,1,1],
+                [1,0,0,0,0,1],
+                [1,0,0,0,0,1],
+                [1,1,1,1,1,1],
+                [1,0,0,0,0,1],
+                [1,0,0,0,0,1]
+            ],
+            g : [
+                [1,1,1,1,1,1],
+                [1,0,0,0,0,0],
+                [1,0,0,1,1,1],
+                [1,0,0,0,0,1],
+                [1,0,0,0,0,1],
+                [1,1,1,1,1,1]
+            ],
+            u : [
+                [1,0,0,0,0,1],
+                [1,0,0,0,0,1],
+                [1,0,0,0,0,1],
+                [1,0,0,0,0,1],
+                [1,0,0,0,0,1],
+                [1,1,1,1,1,1]
+            ],
+            l : [
+                [1,0,0,0,0,0],
+                [1,0,0,0,0,0],
+                [1,0,0,0,0,0],
+                [1,0,0,0,0,0],
+                [1,0,0,0,0,1],
+                [1,1,1,1,1,1]
+            ]
+        }
+        
+        function select(selector) {
+            return document.querySelector(selector)
+        }
+        let iTe = 1;
+
+        function createLetter(letter){
+            const letCoords = coords[letter];
+            const letContainer = document.createElement('ul');
+            letContainer.style = `--del:${iTe}`;
+            for(var i = 0 ; i<6; i++) {
+                const li = document.createElement("li");
+                for (var j=0 ; j<6 ; j++) {
+                    li.style = `--i:${iTe * i * j}`;
+                    const ico = heart(letCoords[i][j] === 0 ? '' : 'fill');
+                    if(ico.classList.contains('fal')){
+                        ico.style.textShadow = 'none';
+                    }else{
+                        ico.classList.add('scaleAnim');
+                        requestAnimationFrame(function anim(){
+                            ico.style.color = `rgb(${(Math.random() * 255)+100},${Math.random()*100},${Math.random()*10})`
+                            setTimeout(()=>{
+                                requestAnimationFrame(anim)
+                            },30)
+                        })
+                    }
+                    li.appendChild(ico)
+                }
+                letContainer.appendChild(li);
+            }
+            iTe+=0.1;
+            return letContainer;
+        }
+
+        function heart(type = 'fill') {
+            const icon = document.createElement('i');
+            icon.className = (type === "fill" ? "fas fa-heart" : "fal fa-heart")
+            return icon;
+        }
+
+        const container = select('.back');
+        
+        const width = (window.innerWidth / 20).toFixed(0);
+        const height = (window.innerHeight / 20).toFixed(0);
+        
+
+        select('.text').appendChild(createLetter('t'))
+        select('.text').appendChild(createLetter('o'))
+        select('.text').appendChild(createLetter('q'))
+        select('.text').appendChild(createLetter('t'))
+        select('.text').appendChild(createLetter('a'))
+        select('.text').appendChild(createLetter('g'))
+        select('.text').appendChild(createLetter('u'))
+        select('.text').appendChild(createLetter('l'))
+    </script>
+</body>
+
+</html>
